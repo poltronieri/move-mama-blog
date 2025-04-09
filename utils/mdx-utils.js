@@ -34,7 +34,10 @@ export const getPosts = () => {
 
     return {
       content,
-      data,
+      data: {
+        ...data,
+        date: data.date ? new Date(data.date).toISOString() : null, // Convert date to ISO string
+      },
       filePath,
     };
   });
@@ -51,7 +54,6 @@ export const getPostBySlug = async (slug) => {
   const { content, data } = matter(source);
 
   const mdxSource = await serialize(content, {
-    // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypePrism, rehypeUnwrapImages],
@@ -59,7 +61,14 @@ export const getPostBySlug = async (slug) => {
     scope: data,
   });
 
-  return { mdxSource, data, postFilePath };
+  return {
+    mdxSource,
+    data: {
+      ...data,
+      date: data.date ? new Date(data.date).toISOString() : null, // Convert date to ISO string
+    },
+    postFilePath,
+  };
 };
 
 export const getNextPostBySlug = (slug) => {
