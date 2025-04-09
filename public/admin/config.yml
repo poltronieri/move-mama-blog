@@ -12,6 +12,7 @@ collections:
     create: true
     slug: "{{slug}}" # Enforce .mdx extension
     extension: "mdx" # Explicitly set the file extension to .mdx
+    format: "frontmatter" # Specify the format as frontmatter
 
     fields:
       - { label: "Title", name: "title", widget: "string" }
