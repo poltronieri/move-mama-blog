@@ -1,10 +1,18 @@
+<!-- public/admin/index.html -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Admin</title>
+    <title>Content Manager</title>
+    <!-- This is the CMS script -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
   </head>
   <body>
+    <!-- This is where Netlify CMS renders the app -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        NetlifyCms.init(); // Ensure the CMS is only initialized after DOM is ready
+      });
+    </script>
   </body>
 </html>
