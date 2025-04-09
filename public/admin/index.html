@@ -1,17 +1,20 @@
-<!-- public/admin/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Content Manager</title>
-    <!-- This is the CMS script -->
-    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+    <title>Decap CMS</title>
+    <!-- This script sets up Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
   </head>
   <body>
-    <!-- This is where Netlify CMS renders the app -->
     <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        NetlifyCms.init(); // Ensure the CMS is only initialized after DOM is ready
+      // Wait until CMS is loaded and DOM is ready
+      window.addEventListener("DOMContentLoaded", function () {
+        if (typeof CMS !== "undefined") {
+          CMS.init();
+        } else {
+          console.error("Decap CMS failed to load.");
+        }
       });
     </script>
   </body>
