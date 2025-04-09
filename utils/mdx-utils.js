@@ -53,20 +53,23 @@ export const getPostBySlug = async (slug) => {
 
   const { content, data } = matter(source);
 
+  // Ensure the date is serialized as a string
+  const serializedData = {
+    ...data,
+    date: data.date ? new Date(data.date).toISOString() : null,
+  };
+
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypePrism, rehypeUnwrapImages],
     },
-    scope: data,
+    scope: serializedData, // Pass the serialized data here
   });
 
   return {
     mdxSource,
-    data: {
-      ...data,
-      date: data.date ? new Date(data.date).toISOString() : null, // Convert date to ISO string
-    },
+    data: serializedData, // Return the serialized data
     postFilePath,
   };
 };
